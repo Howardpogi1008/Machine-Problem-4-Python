@@ -1,0 +1,36 @@
+#MP PRoblem 4 Python!!!
+
+import numpy as np
+import math as mt
+import matplotlib.pyplot as plt
+import sys
+
+H = float(input('Initial height: '))
+V = float(input('Initial velocity m/s: '))
+theta = float(input('Angle when fired: '))
+ax = float(input('X-component of acceleration: '))
+ay = float(input('Y-component of acceleration (Should be Negative): '))
+
+#acceleration of y should not be equal to 0 or it will not be a freefall and 
+#should be in negative.
+if ay == 0:
+    sys.exit('Zero acceleration is not free fall!')
+
+#Equations for the different motions.
+vox = V*mt.cos(mt.radians(theta))
+voy = V*mt.sin(mt.radians(theta))
+d = mt.sqrt(voy**2 - 2*ay*H)
+t = (-voy + d )/ ay
+    
+if t <= 0:
+    t = (-voy - d )/ ay
+    
+x = vox*(np.linspace(0,t)) + 0.5*ax*np.linspace(0,t)**2
+y = voy*np.linspace(0,t) + 0.5*ay*np.linspace(0,t)**2
+        
+#Plotting the points in the graph. Shwing the grid and the x and y axes.
+plt.plot(x,y)
+plt.xlabel('X-axis')
+plt.ylabel('Y-axis')
+plt.grid()
+plt.show()
